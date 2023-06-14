@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework",
+    "community"
 ]
 
 MIDDLEWARE = [
@@ -74,13 +76,17 @@ WSGI_APPLICATION = 'mahol.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'mahol',
+    #     'USER': 'root',
+    #     'PASSWORD': 'mahol@kukufm',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mahol',
-        'USER': 'root',
-        'PASSWORD': 'mahol@kukufm',
-        'HOST': '3.109.210.94',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'HOST': 'localhost',
     }
 }
 
@@ -103,6 +109,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
