@@ -16,7 +16,7 @@ class PostsDao(object):
     def get_posts_by_community_id(community_id, page=1, page_size=10):
         if not community_id:
             return None
-        paginator = Paginator(Posts.objects.filter(community_id=community_id).order_by('created_on'), page_size)
+        paginator = Paginator(Posts.objects.filter(community_id=community_id).order_by('created_at'), page_size)
         paged_posts = paginator.page(page)
         has_next = page < paginator.num_pages
         _posts = []
