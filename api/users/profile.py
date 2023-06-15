@@ -8,7 +8,7 @@ class ProfileV1(APIResponseBase):
 
     def __init__(self, **kwargs):
         super(ProfileV1, self).__init__(**kwargs)
-        self.allowed_methods = ('POST',)
+        self.allowed_methods = ('GET',)
 
     @allowed_methods
     def get_or_create_data(self):
