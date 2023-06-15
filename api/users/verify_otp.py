@@ -1,6 +1,7 @@
 import uuid
 from api.response.base import APIResponseBase
 from api.decorators.validators import allowed_methods
+from helper.auth_helper import AuthHelper
 from users.models import Users
 
 
@@ -22,18 +23,8 @@ class VerifyOtpV1(APIResponseBase):
             data['message'] = "Invalid Params"
             return data
 
-        try:
-            user = Users.objects.get(phone=phone)
-        except Users.DoesNotExist:
-            data['success'] = False
-            data['message'] = "Invalid Phone Number"
-            return data
-
-        token = str(uuid.uuid1())
-        user.token = token
-        user.save()
-
-        data['token'] = token
+        user = AuthHelper.get_or_create_user(phone=phone)
+        data['token'] = user.token
         data['message'] = "OTP verified successfully"
 
         return data

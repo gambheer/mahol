@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Users(models.Model):
-    name = models.CharField(max_length=100, blank=True, default=None)
-    email = models.CharField(max_length=100, blank=True, default=None)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
     phone = models.CharField(max_length=100, blank=False, null=False)
     token = models.CharField(max_length=100, blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
