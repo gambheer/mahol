@@ -7,7 +7,7 @@ class Users(models.Model):
     phone = models.CharField(max_length=100, blank=False, null=False)
     image = models.ImageField(upload_to='uploads/', max_length=500)
     token = models.CharField(max_length=100, blank=False, null=False)
-    department = models.ForeignKey("users.department", on_delete=models.CASCADE)
+    department = models.ForeignKey("users.department", on_delete=models.CASCADE, null=True)
     role = models.IntegerField(blank=False, null=False, default=3)  # admin=1, super_admin=2, user=3
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
