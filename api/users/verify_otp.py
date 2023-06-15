@@ -1,6 +1,8 @@
+import uuid
 from api.response.base import APIResponseBase
 from api.decorators.validators import allowed_methods
 from users.models import Users
+
 
 class VerifyOtpV1(APIResponseBase):
     __versions_compatible__ = ('1', '1.0')
@@ -27,7 +29,11 @@ class VerifyOtpV1(APIResponseBase):
             data['message'] = "Invalid Phone Number"
             return data
 
-        data['token'] = user.token
+        token = uuid.uuid1()
+        user.token = token
+        user.save()
+
+        data['token'] = token
         data['message'] = "OTP verified successfully"
 
         return data
