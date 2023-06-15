@@ -31,11 +31,16 @@ class UsersDao(object):
 
     @classmethod
     def post_json(cls, user):
-        post_json = {"name": user.name,
+        post_json = {"user_id": user.id,
+                     "description": "Hello",
+                     "name": user.name,
                      "email": user.email,
                      "phone": user.phone,
                      "role": user.role,
+                     "department": user.department.name,
                      "image": "https://mahol.s3.ap-south-1.amazonaws.com/users/user.png",
+                     "reaction_count": 5,
+                     "comment_count": 2,
                      "created_at": CommonHelper.from_db_datetime_to_datetime(user.created_at, "%Y-%m-%d", to_str=True)
                      }
         return post_json
