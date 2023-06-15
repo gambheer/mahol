@@ -7,14 +7,14 @@ class CommunityDao(object):
     def get_community_by_id(community_id):
         if not id:
             return None
-        community = Community.object.get(id=community_id)
+        community = Community.objects.get(id=community_id)
         return CommunityDao.community_json(community)
 
     @staticmethod
     def get_community_by_name(name):
         if not name:
             return None
-        community = Community.object.get(name=name)
+        community = Community.objects.get(name=name)
         return CommunityDao.community_json(community)
 
     @staticmethod

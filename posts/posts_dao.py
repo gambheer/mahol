@@ -7,14 +7,14 @@ class PostsDao(object):
     def get_post_by_id(post_id):
         if not id:
             return None
-        post = Posts.object.get(id=post_id)
+        post = Posts.objects.get(id=post_id)
         return PostsDao.post_json(post)
 
     @staticmethod
     def get_community_by_title(title):
         if not title:
             return None
-        post = Posts.object.get(title=title)
+        post = Posts.objects.get(title=title)
         return PostsDao.community_json(post)
 
     @staticmethod
