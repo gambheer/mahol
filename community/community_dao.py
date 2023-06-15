@@ -26,9 +26,9 @@ class CommunityDao(object):
         except Community.DoesNotExist:
             return None
 
-        if user_id:
-            if not CommunityDao.is_community_member(community_id, user_id):
-                return None
+        # if user_id:
+        #     if not CommunityDao.is_community_member(community_id, user_id):
+        #         return None
 
         return CommunityDao.community_json(community)
 
