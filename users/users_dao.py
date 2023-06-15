@@ -16,6 +16,6 @@ class UsersDao(object):
         post_json = {"name": user.name,
                      "email": user.email,
                      "phone": user.phone,
-                     "created_at": CommonHelper.from_db_datetime_to_datetime(user.created, "%Y;%m-%d", to_str=True)
+                     "created_at": CommonHelper.from_db_datetime_to_datetime(user.created_at, "%Y;%m-%d", to_str=True)
                      }
         return post_json
