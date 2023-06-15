@@ -136,7 +136,8 @@ class APIResponseBase(View):
         Returns a HttpResponse with jsonized context.
         """
         _context = {}
-        _context.update(self.get_or_create_context())
+        if self.update_request_body():
+            _context.update(self.get_or_create_context())
 
         if self.message:
             _context['message'] = self.message
