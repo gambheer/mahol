@@ -1,6 +1,6 @@
 from api.response.base import APIResponseBase
 from api.decorators.validators import allowed_methods
-from community.models import Community
+from community.community_dao import CommunityDao
 
 
 class GetCommunityV1(APIResponseBase):
@@ -13,14 +13,13 @@ class GetCommunityV1(APIResponseBase):
     @allowed_methods
     def get_or_create_data(self):
         data = {"success": True}
-        token = self.request.META('token')
-        data['token'] = token
-        return data
-
-        # community_id = self.get_sanitized_int(self.request.GET.get('community_id'))
-        # if not community_id:
-        #     data['token'] = token
-        #     data['success'] = False
-        #     data['message'] = 'Invalid Params'
-
+        user = self.get_user(self.request.META.get('HTTP_AUTHORIZATION'))
+        if not user:
+            data = {"success": False, "message": "Invalid User"}
+            return data
+        _id = self.get_sanitized_int(self.request.GET.get('id'))
+        if not _id:
+            data = {"success": False, "message": "Invalid Community Id"}
+        community = CommunityDao.get_community_by_id(_id)
+        data['community'] = community
         return data

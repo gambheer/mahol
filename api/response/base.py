@@ -5,6 +5,7 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.utils.decorators import classonlymethod
 from django.views.generic.base import View
+from users.models import Users
 
 
 class APIResponseBase(View):
@@ -103,13 +104,14 @@ class APIResponseBase(View):
     def get_request(self):
         return self.request
 
-    def get_profile(self):
-        if self.request.user.is_authenticated:
-            user = self.request.user
-            if not user.has_premium and self.is_user_marked_premium_for_authorized_order(user.id):
-                user.has_premium = True
-            return user
-        return None
+    def get_user(self, token):
+        if not token:
+            return None
+        try:
+            user = Users.objects.get(token=token)
+        except Users.DoesNotExist:
+            return None
+        return user
 
     def get_request_args(self):
         return self.args
