@@ -5,6 +5,7 @@ class Users(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     email = models.CharField(max_length=100, blank=True, null=True)
     phone = models.CharField(max_length=100, blank=False, null=False)
+    image = models.ImageField(upload_to='uploads/', max_length=500)
     token = models.CharField(max_length=100, blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

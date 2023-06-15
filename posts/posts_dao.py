@@ -18,7 +18,7 @@ class PostsDao(object):
             return None
         posts = Posts.objects.get(community_id=community_id)
         paginator = Paginator(posts, page_size)
-        paged_posts = paginator.page(page)
+        paged_posts = paginator.page(posts)
         has_next = page < paginator.num_pages
         _posts = []
         for post in paged_posts:

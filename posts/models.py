@@ -6,8 +6,8 @@ class Posts(models.Model):
     description = models.CharField(max_length=500, blank=False, null=False)
     type = models.CharField(max_length=20, blank=False, null=False)
     content = models.CharField(max_length=500, blank=False, null=False)
-    user_id = models.IntegerField(blank=False, null=False)
-    community_id = models.IntegerField(blank=False, null=False)
+    user = models.ForeignKey("users.Users", on_delete=models.CASCADE)
+    community = models.ForeignKey("community.Community", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

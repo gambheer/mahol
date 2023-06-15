@@ -11,11 +11,19 @@ class UsersDao(object):
         user = Users.objects.get(phone=phone)
         return UsersDao.post_json(user)
 
+    @staticmethod
+    def update_profile(user, image, name):
+        user.image = image
+        user.name = name
+        user.save()
+        return UsersDao.post_json(user)
+
     @classmethod
     def post_json(cls, user):
         post_json = {"name": user.name,
                      "email": user.email,
                      "phone": user.phone,
+                     "image": user.image,
                      "created_at": CommonHelper.from_db_datetime_to_datetime(user.created_at, "%Y-%m-%d", to_str=True)
                      }
         return post_json
