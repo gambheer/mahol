@@ -57,7 +57,7 @@ class CommunityDao(object):
 
     @staticmethod
     def get_community_qams(community_id):
-        qams = CommunityQam.objects.filter(community_id=community_id, status=COMMUNITY_QAM_STATUS)
+        qams = CommunityQam.objects.filter(community_id=community_id, status=COMMUNITY_QAM_STATUS.ACTIVE)
         _qams = []
         for qam in qams:
             _qams.append(CommunityDao.community_qam_json(qam))
