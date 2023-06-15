@@ -31,5 +31,5 @@ class PostsDao(object):
                      "description": post.description,
                      "type": post.type,
                      "content": post.content,
-                     "created_at": CommonHelper.from_db_datetime_to_datetime(post.creted_at, '%Y-%m-%d', to_str=True)}
+                     "created_at": CommonHelper.from_db_datetime_to_datetime(post.created_at, '%Y-%m-%d', to_str=True)}
         return post_json
