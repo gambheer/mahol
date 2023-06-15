@@ -11,5 +11,6 @@ class GetOtpV1(APIResponseBase):
 
     @allowed_methods
     def get_or_create_data(self):
-        data = {}
+        data = {"otp": 123456,
+                "message": "OTP sent successfully"}
         return data

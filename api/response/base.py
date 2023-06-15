@@ -36,7 +36,6 @@ class APIResponseBase(View):
             # Get version from kwargs
             _v = kwargs.get('_v')
             self = None
-            log.debug("Pvs: version: {}".format(_v))
             if _v:
                 # If version is present, find the subclasses which serve this version
                 # Initialize the first one which serves this version.
@@ -136,17 +135,8 @@ class APIResponseBase(View):
         """
         Returns a HttpResponse with jsonized context.
         """
-
-        self.before_creating_context()
-
         _context = {}
-        if self.update_request_body():
-            if self.is_user_suspended():
-                self.set_suspended_user()
-            elif hasattr(self.request, 'token_unique_id') and (not self.is_token_active()):
-                pass
-            else:
-                _context.update(self.get_or_create_context())
+        _context.update(self.get_or_create_context())
 
         if self.message:
             _context['message'] = self.message
@@ -177,16 +167,6 @@ class APIResponseBase(View):
             response.set_cookie(key=self.cookie_key, value=self.cookie_value, expires=self.cookie_expires, secure=True)
 
         return response
-
-    def before_creating_context(self):
-        """
-        Hook to write code to initiliaze/process before creating context
-        """
-        self.add_request_source()
-        self.update_url_kwargs()
-        self.add_utm_source()
-        self.update_user_country_cache()
-        pass
 
     def get_or_create_context(self):
         """
