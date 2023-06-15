@@ -21,7 +21,7 @@ class CommunityDao(object):
         return CommunityDao.community_json(community)
 
     @staticmethod
-    def get_all_communities(page, page_size=10):
+    def get_all_communities(page=1, page_size=10):
         communities = Community.objects.all()
         paginator = Paginator(communities, page_size)
         paged_communities = paginator.page(page)

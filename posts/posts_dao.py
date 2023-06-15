@@ -1,4 +1,6 @@
 from posts.models import Posts
+from django.core.paginator import Paginator
+from helper.common_helper import CommonHelper
 
 
 class PostsDao(object):
@@ -11,23 +13,23 @@ class PostsDao(object):
         return PostsDao.post_json(post)
 
     @staticmethod
-    def get_community_by_title(title):
-        if not title:
+    def get_posts_by_community_id(community_id, page=1, page_size=10):
+        if not community_id:
             return None
-        post = Posts.objects.get(title=title)
-        return PostsDao.community_json(post)
-
-    @staticmethod
-    def get_all_communities():
-        posts = Posts.objects.all()
-        _posts = dict()
-        for post in posts:
-            _posts.update(PostsDao.post_json(post))
-        return _posts
+        posts = Posts.objects.get(community_id=community_id)
+        paginator = Paginator(posts, page_size)
+        paged_posts = paginator.page(page)
+        has_next = page < paginator.num_pages
+        _posts = []
+        for post in paged_posts:
+            _posts.append(PostsDao.post_json(post))
+        return _posts, has_next
 
     @classmethod
     def post_json(cls, post):
         post_json = {"title": post.title,
                      "description": post.description,
-                     "created_at": str(post.created_at)}
+                     "type": post.type,
+                     "content": post.content,
+                     "created_at": CommonHelper.from_db_datetime_to_datetime(post.creted_at, '%Y-%m-%d', to_str=True)}
         return post_json

@@ -19,10 +19,16 @@ class GetPostsV1(APIResponseBase):
             return data
 
         _id = self.get_sanitized_int(self.request.GET.get('id'))
-        if not _id:
+        community_id = self.get_sanitized_int((self.request.GET.get('community_id')))
+        if not _id or not community_id:
             data = {"success": False, "message": "Invalid Params"}
             return data
-
-        post = PostsDao.get_post_by_id(_id)
-        data['post'] = post
+        if _id:
+            post = PostsDao.get_post_by_id(_id)
+            data['post'] = post
+        elif community_id:
+            page = self.get_sanitized_int((self.request.GET.get('page')))
+            posts, has_next = PostsDao.get_posts_by_community_id(community_id, page)
+            data['post'] = posts
+            data['has_next'] = has_next
         return data
