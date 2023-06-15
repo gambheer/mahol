@@ -1,5 +1,5 @@
 from community.models import Community
-
+from helper.common_helper import CommonHelper
 
 class CommunityDao(object):
 
@@ -27,6 +27,7 @@ class CommunityDao(object):
 
     @classmethod
     def community_json(cls, community):
-        communoty_json = {"name": community.name,
-                          "created_at": str(community.created_at)}
-        return communoty_json
+        community_json = {"name": community.name,
+                          "created_at": CommonHelper.from_db_datetime_to_datetime(community.created_at,
+                                                                                  "%Y-%m-%d", to_str=True)}
+        return community_json
