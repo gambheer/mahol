@@ -22,8 +22,7 @@ class CommunityDao(object):
 
     @staticmethod
     def get_all_communities(page=1, page_size=10):
-        communities = Community.objects.all()
-        paginator = Paginator(communities, page_size)
+        paginator = Paginator(Community.objects.all(), page_size)
         paged_communities = paginator.page(page)
         has_next = page < paginator.num_pages
         _communities = []
