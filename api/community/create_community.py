@@ -18,7 +18,7 @@ class CreateCommunityV1(APIResponseBase):
             data = {"success": False, "message": "Invalid User"}
             return data
         title = self.request.POST.get('title')
-        logo = self.request.FILE.get('logo')
+        logo = self.request.FILES.get('logo')
         if not title:
             data = {"success": False, "message": "Invalid Params"}
             return data
