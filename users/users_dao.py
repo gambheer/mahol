@@ -22,7 +22,7 @@ class UsersDao(object):
 
     @staticmethod
     def get_all_users(page=1, page_size=10):
-        paginator = Paginator(UsersDao.objects.all(), page_size)
+        paginator = Paginator(Users.objects.all(), page_size)
         paged_users = paginator.page(page)
         has_next = page < paginator.num_pages
         _users = []
