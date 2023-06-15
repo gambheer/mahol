@@ -20,8 +20,9 @@ class VerifyOtpV1(APIResponseBase):
             data['message'] = "Invalid Params"
             return data
 
-        user = Users.objects.get(phone=phone)
-        if not user:
+        try:
+            user = Users.objects.get(phone=phone)
+        except Users.DoesNotExist:
             data['success'] = False
             data['message'] = "Invalid Phone Number"
             return data
