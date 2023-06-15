@@ -29,5 +29,5 @@ class PostsDao(object):
     def post_json(cls, post):
         post_json = {"title": post.title,
                      "description": post.description,
-                     "created_at": post.created_at}
+                     "created_at": str(post.created_at)}
         return post_json

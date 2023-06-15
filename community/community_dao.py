@@ -28,5 +28,5 @@ class CommunityDao(object):
     @classmethod
     def community_json(cls, community):
         communoty_json = {"name": community.name,
-                          "created_at": community.created_at}
+                          "created_at": str(community.created_at)}
         return communoty_json
