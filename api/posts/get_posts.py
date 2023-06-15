@@ -21,6 +21,8 @@ class GetPostsV1(APIResponseBase):
         _id = self.get_sanitized_int(self.request.GET.get('id'))
         if not _id:
             data = {"success": False, "message": "Invalid Params"}
+            return data
+
         post = PostsDao.get_post_by_id(_id)
         data['post'] = post
         return data

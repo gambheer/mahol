@@ -181,9 +181,7 @@ class APIResponseBase(View):
 
         _context = {}
         self._context = _context
-
         self.add_data_to_context()
-        #self.add_header_to_context()
         self.on_context_created()
 
         return self._context
