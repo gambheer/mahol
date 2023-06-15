@@ -17,11 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from mahol import versioned_url
-from . import view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("community.urls")),
-    path('api/', versioned_url),
-    path('ping/', view.ping()),
+    path('api/', include(versioned_url)),
+    # path('ping/', view.ping()),
 ]

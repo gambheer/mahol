@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../kukufm-py/.idea/kukufm-py.iml" filepath="$PROJECT_DIR$/../kukufm-py/.idea/kukufm-py.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/mahol.iml" filepath="$PROJECT_DIR$/.idea/mahol.iml" />
     </modules>
   </component>
