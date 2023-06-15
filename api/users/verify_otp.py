@@ -29,7 +29,7 @@ class VerifyOtpV1(APIResponseBase):
             data['message'] = "Invalid Phone Number"
             return data
 
-        token = uuid.uuid1()
+        token = str(uuid.uuid1())
         user.token = token
         user.save()
 
