@@ -3,7 +3,7 @@ from django.db import models
 
 class Community(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
-    logo = models.CharField(max_length=100, blank=True, null=True)
+    logo = models.ImageField(upload_to='uploads/', max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
