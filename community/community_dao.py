@@ -18,16 +18,17 @@ class CommunityDao(object):
         return _community
 
     @staticmethod
-    def get_community_by_id(community_id, user_id):
-        if not community_id or not user_id:
+    def get_community_by_id(community_id, user_id=None):
+        if not community_id:
             return None
         try:
             community = Community.objects.get(id=community_id)
         except Community.DoesNotExist:
             return None
 
-        if not CommunityDao.is_community_member:
-            return None
+        if user_id:
+            if not CommunityDao.is_community_member(community_id, user_id):
+                return None
 
         return CommunityDao.community_json(community)
 

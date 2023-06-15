@@ -1,6 +1,5 @@
 from api.response.base import APIResponseBase
 from api.decorators.validators import allowed_methods
-from community.community_dao import CommunityDao
 from helper.community_helper import CommunityHelper
 
 
@@ -19,7 +18,7 @@ class JoinCommunityV1(APIResponseBase):
             data = {"success": False, "message": "Invalid User"}
             return data
 
-        community_id = self.get_sanitized_int(self.request.GET.get('community_id'))
+        community_id = self.get_sanitized_int(self.request.POST.get('community_id'))
         if not community_id:
             data = {"success": False, "message": "Invalid Params"}
             return data

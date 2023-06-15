@@ -23,7 +23,7 @@ class GetMembersV1(APIResponseBase):
         status = self.get_sanitized_int(self.request.GET.get('status', COMMUNITY_MEMBER_STATUS.ACTIVE))
         page = self.get_sanitized_int(self.request.GET.get('page', 1))
 
-        community = CommunityDao.get_community_by_id(community_id)
+        community = CommunityDao.get_community_by_id(community_id, user.id)
         if not community:
             data = {"success": False, "message": "Invalid Community"}
             return data
