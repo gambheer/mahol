@@ -18,11 +18,6 @@ class GetCommunitiesV1(APIResponseBase):
             data = {"success": False, "message": "Invalid User"}
             return data
 
-        _id = self.get_sanitized_int(self.request.GET.get('id'))
-        if not _id:
-            data = {"success": False, "message": "Invalid Community Id"}
-            return data
-
         communities = CommunityDao.get_all_communities()
         data['communities'] = communities
         return data
