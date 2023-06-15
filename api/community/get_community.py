@@ -17,15 +17,15 @@ class GetCommunityV1(APIResponseBase):
         if not user:
             data = {"success": False, "message": "Invalid User"}
             return data
-        community_id = self.get_sanitized_int(self.request.GET.get('community_id'))
-        if not community_id:
+        _id = self.get_sanitized_int(self.request.GET.get('id'))
+        if not _id:
             data = {"success": False, "message": "Invalid Params"}
             return data
 
-        community = CommunityDao.get_community_by_id(community_id)
+        community = CommunityDao.get_community_by_id(_id)
         data['community'] = community
 
-        community_qams = CommunityDao.get_community_qams(community_id)
+        community_qams = CommunityDao.get_community_qams(_id)
         data['community_qams'] = community_qams
 
         return data
