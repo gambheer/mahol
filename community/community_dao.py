@@ -20,9 +20,9 @@ class CommunityDao(object):
     @staticmethod
     def get_all_communities():
         communities = Community.objects.all()
-        _communities = dict()
+        _communities = []
         for community in communities:
-            _communities.update(CommunityDao.community_json(community))
+            _communities.append(CommunityDao.community_json(community))
         return _communities
 
     @classmethod
