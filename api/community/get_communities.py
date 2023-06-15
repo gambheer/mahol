@@ -17,7 +17,8 @@ class GetCommunitiesV1(APIResponseBase):
         if not user:
             data = {"success": False, "message": "Invalid User"}
             return data
-
-        communities = CommunityDao.get_all_communities()
+        page = self.request.GET.get('page', 1)
+        communities, has_next = CommunityDao.get_all_communities(page)
         data['communities'] = communities
+        data['has_next'] = has_next
         return data

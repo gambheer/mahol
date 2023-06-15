@@ -1,7 +1,10 @@
 from community.models import Community
 from helper.common_helper import CommonHelper
+from django.core.paginator import Paginator
+
 
 class CommunityDao(object):
+    page_size = 10
 
     @staticmethod
     def get_community_by_id(community_id):
@@ -18,12 +21,15 @@ class CommunityDao(object):
         return CommunityDao.community_json(community)
 
     @staticmethod
-    def get_all_communities():
+    def get_all_communities(page, page_size=10):
         communities = Community.objects.all()
+        paginator = Paginator(communities, page_size)
+        paged_communities = paginator.page(page)
+        has_next = page < paginator.num_pages
         _communities = []
-        for community in communities:
+        for community in paged_communities:
             _communities.append(CommunityDao.community_json(community))
-        return _communities
+        return _communities, has_next
 
     @classmethod
     def community_json(cls, community):
