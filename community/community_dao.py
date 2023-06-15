@@ -14,7 +14,7 @@ class CommunityDao(object):
         if logo:
             community.logo = logo
         community = community.save()
-        return CommunityDao.community_json(community)
+        return CommunityDao.community_json(community, id_required=False)
 
     @staticmethod
     def get_community_by_id(community_id, user_id):
@@ -74,11 +74,14 @@ class CommunityDao(object):
         return _qams
 
     @classmethod
-    def community_json(cls, community):
-        community_json = {"id": community.id,
-                          "name": community.name,
-                          "logo": str(community.logo),
-                          "created_at": CommonHelper.from_db_datetime_to_datetime(community.created_at, "%Y-%m-%d", to_str=True)}
+    def community_json(cls, community, id_required=True):
+        community_json = {}
+        if id_required:
+            community_json = {"id": community.id}
+        community_json.update({"name": community.name,
+                               "logo": str(community.logo),
+                               "created_at": CommonHelper.from_db_datetime_to_datetime(community.created_at,
+                                                                                       "%Y-%m-%d", to_str=True)})
         return community_json
 
     @classmethod
