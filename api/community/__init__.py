@@ -1,1 +1,2 @@
-from .get_communities import GetOtpV1
+from .get_communities import GetCommunitiesV1
+from .get_community import GetCommunityV1
