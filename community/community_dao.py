@@ -55,7 +55,7 @@ class CommunityDao(object):
     @staticmethod
     def is_community_member(user_id, community_id):
         return CommunityMembers.objects.filter(user_id=user_id, community_id=community_id,
-                                               status=COMMUNITY_MEMBER_STATUS.ACTIVE).exist()
+                                               status=COMMUNITY_MEMBER_STATUS.ACTIVE).exists()
 
     @staticmethod
     def get_community_members(community_id, status, page, page_size=10):
