@@ -18,7 +18,8 @@ class JoinCommunityV1(APIResponseBase):
             data = {"success": False, "message": "Invalid User"}
             return data
 
-        community_id = self.get_sanitized_int(self.request.POST.get('community_id'))
+        request_body = self.request.req_body
+        community_id = self.get_sanitized_int(request_body.get('community_id'))
         if not community_id:
             data = {"success": False, "message": "Invalid Params"}
             return data
