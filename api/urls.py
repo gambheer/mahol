@@ -1,7 +1,7 @@
 from django.urls import include, re_path
-from .users import urls as user_urls
-from .community import urls as community_urls
-from .posts import urls as post_urls
+from users import urls as user_urls
+from community import urls as community_urls
+from posts import urls as post_urls
 
 
 urlpatterns = [

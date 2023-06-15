@@ -8,7 +8,7 @@ class GetPostsV1(APIResponseBase):
 
     def __init__(self, **kwargs):
         super(GetPostsV1, self).__init__(**kwargs)
-        self.allowed_methods = ('POST',)
+        self.allowed_methods = ('GET',)
 
     @allowed_methods
     def get_or_create_data(self):
