@@ -4,7 +4,6 @@ from django.db import models
 class Community(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     logo = models.CharField(max_length=100, blank=True, null=True)
-    total_members = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -15,8 +14,9 @@ class Community(models.Model):
         return self.name
 
 
-class CommunityOwners(models.Model):
+class CommunityMembers(models.Model):
     community = models.ForeignKey('community.Community', on_delete=models.CASCADE)
     user = models.ForeignKey("users.Users", on_delete=models.CASCADE)
+    role = models.CharField(max_length=20, blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
