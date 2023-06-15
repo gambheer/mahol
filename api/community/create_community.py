@@ -17,12 +17,16 @@ class CreateCommunityV1(APIResponseBase):
         if not user:
             data = {"success": False, "message": "Invalid User"}
             return data
-        title = self.request.POST.get('title')
+        name = self.request.POST.get('name')
         logo = self.request.FILES.get('logo')
-        if not title:
+        if not name:
             data = {"success": False, "message": "Invalid Params"}
             return data
 
-        community = CommunityDao.create_community(title, logo)
+        if CommunityDao.get_community_by_name(name):
+            data = {"success": False, "message": "Community already exist"}
+            return data
+
+        community = CommunityDao.create_community(name, logo)
         data['community'] = community
         return data

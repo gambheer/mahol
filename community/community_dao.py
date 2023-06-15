@@ -1,5 +1,5 @@
 from community.models import Community, CommunityMembers, CommunityQam
-from constants.community import COMMUNITY_MEMBER_STATUS, COMMUNITY_QAM_STATUS
+from constants.community import COMMUNITY_MEMBER_STATUS, COMMUNITY_QAM_STATUS, COMMUNITY_STATUS
 from helper.common_helper import CommonHelper
 from django.core.paginator import Paginator
 
@@ -13,7 +13,7 @@ class CommunityDao(object):
         community.name = name
         if logo:
             community.logo = logo
-        community.save()
+        community = community.save()
         return CommunityDao.community_json(community)
 
     @staticmethod
@@ -35,7 +35,7 @@ class CommunityDao(object):
         if not name:
             return None
         try:
-            community = Community.objects.get(name=name)
+            community = Community.objects.get(name=name, status=COMMUNITY_STATUS.ACTIVE)
         except Community.DoesNotExist:
             return None
         return CommunityDao.community_json(community)
