@@ -1,14 +1,15 @@
 from api.response.base import APIResponseBase
 from api.decorators.validators import allowed_methods
 from community.community_dao import CommunityDao
+from helper.community_helper import CommunityHelper
 
 
-class GetCommunityV1(APIResponseBase):
+class JoinCommunityV1(APIResponseBase):
     __versions_compatible__ = ('1', '1.0')
 
     def __init__(self, **kwargs):
-        super(GetCommunityV1, self).__init__(**kwargs)
-        self.allowed_methods = ('GET',)
+        super(JoinCommunityV1, self).__init__(**kwargs)
+        self.allowed_methods = ('POST',)
 
     @allowed_methods
     def get_or_create_data(self):
@@ -17,15 +18,13 @@ class GetCommunityV1(APIResponseBase):
         if not user:
             data = {"success": False, "message": "Invalid User"}
             return data
+
         community_id = self.get_sanitized_int(self.request.GET.get('community_id'))
         if not community_id:
             data = {"success": False, "message": "Invalid Params"}
             return data
 
-        community = CommunityDao.get_community_by_id(community_id)
-        data['community'] = community
-
-        community_qams = CommunityDao.get_community_qams(community_id)
-        data['community_qams'] = community_qams
-
+        success, message = CommunityHelper.join_community(user.id, community_id)
+        data['success'] = success
+        data['message'] = message
         return data

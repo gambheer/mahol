@@ -3,12 +3,12 @@ from api.decorators.validators import allowed_methods
 from community.community_dao import CommunityDao
 
 
-class GetCommunityV1(APIResponseBase):
+class AddMemberV1(APIResponseBase):
     __versions_compatible__ = ('1', '1.0')
 
     def __init__(self, **kwargs):
-        super(GetCommunityV1, self).__init__(**kwargs)
-        self.allowed_methods = ('GET',)
+        super(AddMemberV1, self).__init__(**kwargs)
+        self.allowed_methods = ('POST',)
 
     @allowed_methods
     def get_or_create_data(self):
@@ -17,15 +17,11 @@ class GetCommunityV1(APIResponseBase):
         if not user:
             data = {"success": False, "message": "Invalid User"}
             return data
-        community_id = self.get_sanitized_int(self.request.GET.get('community_id'))
-        if not community_id:
-            data = {"success": False, "message": "Invalid Params"}
+        _id = self.get_sanitized_int(self.request.GET.get('id'))
+        if not _id:
+            data = {"success": False, "message": "Invalid Community Id"}
             return data
 
-        community = CommunityDao.get_community_by_id(community_id)
+        community = CommunityDao.get_community_by_id(_id)
         data['community'] = community
-
-        community_qams = CommunityDao.get_community_qams(community_id)
-        data['community_qams'] = community_qams
-
         return data
