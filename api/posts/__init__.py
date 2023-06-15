@@ -1,0 +1,1 @@
+from .get_posts import GetPostsV1

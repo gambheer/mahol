@@ -76,18 +76,18 @@ WSGI_APPLICATION = 'mahol.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mahol',
-        'USER': 'root',
-        'PASSWORD': 'mahol@kukufm',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'mahol',
+    #     'USER': 'root',
+    #     'PASSWORD': 'mahol@kukufm',
     #     'HOST': 'localhost',
+    #     'PORT': '3306',
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'HOST': 'localhost',
+    }
 }
 
 
