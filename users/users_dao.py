@@ -1,5 +1,6 @@
 from users.models import Users
 from helper.common_helper import CommonHelper
+from django.core.paginator import Paginator
 
 
 class UsersDao(object):
@@ -9,7 +10,7 @@ class UsersDao(object):
         if not phone:
             return None
         user = Users.objects.get(phone=phone)
-        return UsersDao.post_json(user)
+        return UsersDao.user_json(user)
 
     @staticmethod
     def get_user_by_id(user_id):
@@ -20,6 +21,16 @@ class UsersDao(object):
         return user
 
     @staticmethod
+    def get_all_users(page=1, page_size=10):
+        paginator = Paginator(UsersDao.objects.all(), page_size)
+        paged_users = paginator.page(page)
+        has_next = page < paginator.num_pages
+        _users = []
+        for user in paged_users:
+            _users.append(UsersDao.user_json(user))
+        return _users, has_next
+
+    @staticmethod
     def update_profile(user_id, image, name):
         user = UsersDao.get_user_by_id(user_id)
         if not user:
@@ -27,10 +38,10 @@ class UsersDao(object):
         user.image = image
         user.name = name
         user.save()
-        return UsersDao.post_json(user)
+        return UsersDao.user_json(user)
 
     @classmethod
-    def post_json(cls, user):
+    def user_json(cls, user):
         post_json = {"user_id": user.id,
                      "description": "Hello",
                      "name": user.name,

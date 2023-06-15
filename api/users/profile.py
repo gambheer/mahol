@@ -18,5 +18,5 @@ class ProfileV1(APIResponseBase):
             data = {"success": False, "message": "Invalid User"}
             return data
 
-        data['user'] = UsersDao.post_json(user)
+        data['user'] = UsersDao.user_json(user)
         return data

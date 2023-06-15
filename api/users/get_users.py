@@ -3,12 +3,12 @@ from api.decorators.validators import allowed_methods
 from users.users_dao import UsersDao
 
 
-class UpdateProfileV1(APIResponseBase):
+class GetUsersV1(APIResponseBase):
     __versions_compatible__ = ('1', '1.0')
 
     def __init__(self, **kwargs):
-        super(UpdateProfileV1, self).__init__(**kwargs)
-        self.allowed_methods = ('POST',)
+        super(GetUsersV1, self).__init__(**kwargs)
+        self.allowed_methods = ('GET',)
 
     @allowed_methods
     def get_or_create_data(self):
@@ -17,9 +17,8 @@ class UpdateProfileV1(APIResponseBase):
         if not user:
             data = {"success": False, "message": "Invalid User"}
             return data
-        request = self.request
-        image = request.FILES.get('image')
-        name = request.POST.get('name')
-        UsersDao.update_profile(user.id, image, name)
-        data['user'] = UsersDao.user_json(user)
+        page = self.get_sanitized_int(self.request.GET.get('page', 1))
+        users, has_next = UsersDao.get_all_users(page)
+        data['users'] = users
+        data['has_next'] = has_next
         return data
