@@ -17,17 +17,27 @@ class CommunityDao(object):
         return CommunityDao.community_json(community)
 
     @staticmethod
-    def get_community_by_id(community_id):
-        if not id:
+    def get_community_by_id(community_id, user_id):
+        if not community_id or not user_id:
             return None
-        community = Community.objects.get(id=community_id)
+        try:
+            community = Community.objects.get(id=community_id)
+        except Community.DoesNotExist:
+            return None
+
+        if not CommunityDao.is_community_member:
+            return None
+
         return CommunityDao.community_json(community)
 
     @staticmethod
     def get_community_by_name(name):
         if not name:
             return None
-        community = Community.objects.get(name=name)
+        try:
+            community = Community.objects.get(name=name)
+        except Community.DoesNotExist:
+            return None
         return CommunityDao.community_json(community)
 
     @staticmethod
@@ -65,10 +75,10 @@ class CommunityDao(object):
 
     @classmethod
     def community_json(cls, community):
-        community_json = {"name": community.name,
+        community_json = {"id": community.id,
+                          "name": community.name,
                           "logo": str(community.logo),
-                          "created_at": CommonHelper.from_db_datetime_to_datetime(community.created_at,
-                                                                                  "%Y-%m-%d", to_str=True)}
+                          "created_at": CommonHelper.from_db_datetime_to_datetime(community.created_at, "%Y-%m-%d", to_str=True)}
         return community_json
 
     @classmethod

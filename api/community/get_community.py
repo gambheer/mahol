@@ -22,9 +22,12 @@ class GetCommunityV1(APIResponseBase):
             data = {"success": False, "message": "Invalid Params"}
             return data
 
-        community = CommunityDao.get_community_by_id(_id)
-        data['community'] = community
+        community = CommunityDao.get_community_by_id(_id, user.id)
+        if not community:
+            data = {"success": False, "message": "Invalid Community"}
+            return data
 
+        data['community'] = community
         community_qams = CommunityDao.get_community_qams(_id)
         data['community_qams'] = community_qams
 
