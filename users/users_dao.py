@@ -12,7 +12,18 @@ class UsersDao(object):
         return UsersDao.post_json(user)
 
     @staticmethod
-    def update_profile(user, image, name):
+    def get_user_by_id(user_id):
+        try:
+            user = Users.objects.get(id=user_id)
+        except Users.DoesNotExist:
+            return None
+        return user
+
+    @staticmethod
+    def update_profile(user_id, image, name):
+        user = UsersDao.get_user_by_id(user_id)
+        if not user:
+            return None
         user.image = image
         user.name = name
         user.save()

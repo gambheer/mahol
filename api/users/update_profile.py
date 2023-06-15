@@ -20,6 +20,6 @@ class UpdateProfileV1(APIResponseBase):
         request = self.request
         image = request.FILES.get('image')
         name = request.POST.get('name')
-        user = UsersDao.update_profile(user, image, name)
+        UsersDao.update_profile(user.id, image, name)
         data['user'] = UsersDao.post_json(user)
         return data
