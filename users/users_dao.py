@@ -34,6 +34,7 @@ class UsersDao(object):
         post_json = {"name": user.name,
                      "email": user.email,
                      "phone": user.phone,
+                     "role": user.role,
                      "image": "https://mahol.s3.ap-south-1.amazonaws.com/users/user.png",
                      "created_at": CommonHelper.from_db_datetime_to_datetime(user.created_at, "%Y-%m-%d", to_str=True)
                      }
