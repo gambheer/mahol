@@ -76,7 +76,7 @@ class CommunityDao(object):
         return _qams
 
     @classmethod
-    def community_json(cls, community, id_required=True):
+    def community_json(cls, community):
         community_json = {"id": community.id, "name": community.name, "logo": str(community.logo),
                           "created_at": CommonHelper.from_db_datetime_to_datetime(community.created_at,
                                                                                   "%Y-%m-%d", to_str=True)}
@@ -85,6 +85,7 @@ class CommunityDao(object):
     @classmethod
     def community_member_json(cls, community_member):
         community_member_json = {"name": community_member.user.name,
+                                 "image": community_member.user.image,
                                  "role": community_member.role}
         return community_member_json
 
