@@ -5,9 +5,10 @@ from posts.models import Posts
 
 class PostHelper(object):
     @staticmethod
-    def create_post(community_id, title, _type, description):
+    def create_post(community_id, title, _type, description, user_id):
         post = Posts()
         post.title = title
+        post.user_id = user_id
         post.type = _type
         post.content = PostHelper.get_content_by_type(_type)
         post.description = description

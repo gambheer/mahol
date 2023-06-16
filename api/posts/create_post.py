@@ -28,7 +28,7 @@ class CreatePostV1(APIResponseBase):
         title = request_body.get('title', "Why it is raining today.")
         _type = request_body.get('type',  'text')
         description = request_body.get('description', "Raining effect is in all over india")
-        PostHelper.create_post(community_id, title, _type, description)
+        PostHelper.create_post(community_id, title, _type, description, user.id)
 
         data = {"success": True, "message": "Post created successfully"}
         return data
