@@ -17,9 +17,10 @@ class CreateQamV1(APIResponseBase):
         if not user:
             data = {"success": False, "message": "Invalid User"}
             return data
-        title = self.request.POST.get('name')
-        link = self.request.FILES.get('logo')
-        community_id = self.request.FILES.get('community_id')
+        request_body = self.request.req_body
+        title = request_body.get('title')
+        link = request_body.get('link')
+        community_id = request_body.get('community_id')
         CommunityDao.create_community_qam(community_id, title, link)
         data = {"success": True, "message": "QAM created successfully"}
         return data
