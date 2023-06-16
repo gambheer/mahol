@@ -18,8 +18,18 @@ class PostHelper(object):
     @staticmethod
     def get_content_by_type(_type):
         r = random.randint(1, 10)
+        images = ['https://mahol.s3.ap-south-1.amazonaws.com/Greeting/1.png',
+                  'https://mahol.s3.ap-south-1.amazonaws.com/Greeting/3.png',
+                  'https://mahol.s3.ap-south-1.amazonaws.com/Greeting/4.png',
+                  'https://mahol.s3.ap-south-1.amazonaws.com/Greeting/6.png',
+                  'https://mahol.s3.ap-south-1.amazonaws.com/Greeting/7.png',
+                  'https://mahol.s3.ap-south-1.amazonaws.com/Greeting/8.png',
+                  'https://mahol.s3.ap-south-1.amazonaws.com/Greeting/9.png',
+                  'https://mahol.s3.ap-south-1.amazonaws.com/Greeting/14.png',
+                  'https://mahol.s3.ap-south-1.amazonaws.com/Greeting/Priya.png',
+                  'https://mahol.s3.ap-south-1.amazonaws.com/Greeting/Rohit.png']
         if _type == 'image':
-            return COMMUNITY_POST_IMAGES[r]
+            return images[r]
         return None
 
 
