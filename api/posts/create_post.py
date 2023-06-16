@@ -18,13 +18,13 @@ class CreatePostV1(APIResponseBase):
             data = {"success": False, "message": "Invalid User"}
             return data
 
-        community_id = self.get_sanitized_int(self.request.POST.get('community_id'))
+        request_body = self.request.req_body
+        community_id = self.get_sanitized_int(request_body.get('community_id'))
 
         if not community_id:
             data = {"success": False, "message": "Invalid Params"}
             return data
 
-        request_body = self.request.req_body
         title = request_body.get('title', "Why it is raining today.")
         _type = request_body.get('type',  'text')
         description = request_body.get('description', "Raining effect is in all over india")
