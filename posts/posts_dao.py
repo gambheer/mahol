@@ -28,7 +28,7 @@ class PostsDao(object):
     def get_post_comments(post_id, page, page_size=10):
         if not post_id:
             return None
-        paginator = Paginator(Comments.objects.filter(community_id=post_id).order_by('created_at'), page_size)
+        paginator = Paginator(Comments.objects.filter(post_id=post_id).order_by('created_at'), page_size)
         paged_comments = paginator.page(page)
         has_next = page < paginator.num_pages
         _comments = []
