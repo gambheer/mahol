@@ -1,4 +1,4 @@
-from posts.models import Posts
+from posts.models import Posts, Comments
 from django.core.paginator import Paginator
 from helper.common_helper import CommonHelper
 
@@ -23,6 +23,18 @@ class PostsDao(object):
         for post in paged_posts:
             _posts.append(PostsDao.post_json(post))
         return _posts, has_next
+
+    @staticmethod
+    def get_post_comments(post_id, page, page_size=10):
+        if not post_id:
+            return None
+        paginator = Paginator(Comments.objects.filter(community_id=post_id).order_by('created_at'), page_size)
+        paged_comments = paginator.page(page)
+        has_next = page < paginator.num_pages
+        _comments = []
+        for comment in paged_comments:
+            _comments.append(PostsDao.post_json(comment))
+        return _comments, has_next
 
     @classmethod
     def post_json(cls, post):
