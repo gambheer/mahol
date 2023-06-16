@@ -1,5 +1,5 @@
 import random
-from posts.models import Posts
+from posts.models import Posts, Comments
 
 
 class PostHelper(object):
@@ -32,4 +32,13 @@ class PostHelper(object):
             return images[r]
         return None
 
+    @staticmethod
+    def create_comment_on_post(user_id, post_id, title, _type, description):
+        comment = Comments()
+        comment.title = title
+        comment.user_id = user_id
+        comment.type = _type
+        comment.content = PostHelper.get_content_by_type(_type)
+        comment.post_id = post_id
 
+        comment.save()

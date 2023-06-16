@@ -1,6 +1,6 @@
 from api.response.base import APIResponseBase
 from api.decorators.validators import allowed_methods
-from community.community_dao import CommunityDao
+from helper.post_helper import PostHelper
 
 
 class PostCommentV1(APIResponseBase):
@@ -17,9 +17,14 @@ class PostCommentV1(APIResponseBase):
         if not user:
             data = {"success": False, "message": "Invalid User"}
             return data
-        title = self.request.POST.get('title')
-        description = self.request.POST.get('description')
-        content = self.request.POST.get('content')
-        file = self.request.FILES.get('media')
+        request_body = self.request.req_body
+
+        post_id = self.get_sanitized_int(request_body.get('post_id'))
+        title = request_body.get('title', "Why it is raining today.")
+        _type = request_body.get('type', 'text')
+        description = request_body.get('description', "Raining effect is in all over india")
+        PostHelper.create_comment_on_post(user.id, post_id, title, _type, description)
+        data = {"success": True, "message": "Comment created successfully"}
+        return data
 
         return data

@@ -19,7 +19,7 @@ class AddMemberV1(APIResponseBase):
             return data
         request_body = self.request.req_body
         user_id = self.get_sanitized_int(request_body.get('user_id'))
-        community_id = self.get_sanitized_int(request_body.get('community_id', 12))
+        community_id = self.get_sanitized_int(request_body.get('community_id'))
         CommunityHelper.add_member(user_id, community_id)
         data = {"success": True, "message": "Member added successfully"}
         return data
