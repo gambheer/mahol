@@ -20,3 +20,12 @@ class CommunityHelper(object):
         member.status = COMMUNITY_MEMBER_STATUS.REQUESTED
         member.save()
         return True, "Request sent for approval."
+
+    @staticmethod
+    def add_member(user_id, community_id):
+        member = CommunityMembers()
+        member.user_id = user_id
+        member.community_id = community_id
+        member.status = COMMUNITY_MEMBER_STATUS.ACTIVE
+
+        member.save()

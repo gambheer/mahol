@@ -1,5 +1,4 @@
 import random
-from constants.community import COMMUNITY_POST_IMAGES
 from posts.models import Posts
 
 

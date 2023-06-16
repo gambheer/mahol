@@ -1,6 +1,6 @@
 from api.response.base import APIResponseBase
 from api.decorators.validators import allowed_methods
-from community.community_dao import CommunityDao
+from helper.community_helper import CommunityHelper
 
 
 class AddMemberV1(APIResponseBase):
@@ -17,11 +17,9 @@ class AddMemberV1(APIResponseBase):
         if not user:
             data = {"success": False, "message": "Invalid User"}
             return data
-        _id = self.get_sanitized_int(self.request.GET.get('id'))
-        if not _id:
-            data = {"success": False, "message": "Invalid Community Id"}
-            return data
-
-        community = CommunityDao.get_community_by_id(_id)
-        data['community'] = community
+        request_body = self.request.req_body
+        user_id = self.get_sanitized_int(request_body.get('user_id'))
+        community_id = self.get_sanitized_int(request_body.get('community_id', 12))
+        CommunityHelper.add_member(user_id, community_id)
+        data = {"success": True, "message": "Member added successfully"}
         return data
