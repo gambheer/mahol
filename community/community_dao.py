@@ -75,6 +75,15 @@ class CommunityDao(object):
             _qams.append(CommunityDao.community_qam_json(qam))
         return _qams
 
+    @staticmethod
+    def create_community_qam(community_id, title, link):
+        qam = CommunityQam()
+        qam.community_id = community_id
+        qam.title = title
+        qam.link = link
+
+        qam.save()
+
     @classmethod
     def community_json(cls, community):
         community_json = {"id": community.id, "name": community.name, "logo": str(community.logo),

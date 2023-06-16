@@ -1,6 +1,7 @@
 from community.models import CommunityMembers
 from community.community_dao import CommunityDao
 from constants.community import COMMUNITY_MEMBER_STATUS
+from posts.models import Posts
 
 
 class CommunityHelper(object):
