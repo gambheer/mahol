@@ -6,6 +6,7 @@ from . import CreateCommunityV1
 from . import JoinCommunityV1
 from . import AddMemberV1
 from . import GetMembersV1
+from . import CreateQamV1
 
 urlpatterns = [
     re_path('^get-communities/$', csrf_exempt(GetCommunitiesV1.as_versioned_view())),
@@ -14,4 +15,5 @@ urlpatterns = [
     re_path('^join-community/$', csrf_exempt(JoinCommunityV1.as_versioned_view())),
     re_path('^add-member/$', csrf_exempt(AddMemberV1.as_versioned_view())),
     re_path('^get-members/$', csrf_exempt(GetMembersV1.as_versioned_view())),
+    re_path('^create-qam/$', csrf_exempt(CreateQamV1.as_versioned_view())),
 ]

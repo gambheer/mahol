@@ -3,11 +3,11 @@ from api.decorators.validators import allowed_methods
 from community.community_dao import CommunityDao
 
 
-class CreateCommunityV1(APIResponseBase):
+class CreateQamV1(APIResponseBase):
     __versions_compatible__ = ('1', '1.0')
 
     def __init__(self, **kwargs):
-        super(CreateCommunityV1, self).__init__(**kwargs)
+        super(CreateQamV1, self).__init__(**kwargs)
         self.allowed_methods = ('POST',)
 
     @allowed_methods

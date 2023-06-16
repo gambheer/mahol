@@ -4,3 +4,4 @@ from .create_community import CreateCommunityV1
 from .join_community import JoinCommunityV1
 from .add_member import AddMemberV1
 from .get_members import GetMembersV1
+from .create_qam import CreateQamV1
