@@ -24,9 +24,10 @@ class CreatePostV1(APIResponseBase):
             data = {"success": False, "message": "Invalid Params"}
             return data
 
-        title = self.request.POST.get('title', "Why it is raining today.")
-        _type = self.request.POST.get('type', 'text')
-        description = self.request.POST.get('description', "Raining effect is in all over india")
+        request_body = self.request.req_body
+        title = request_body.get('title', "Why it is raining today.")
+        _type = request_body.get('type',  'text')
+        description = request_body.get('description', "Raining effect is in all over india")
         PostHelper.create_post(community_id, title, _type, description)
 
         data = {"success": True, "message": "Post created successfully"}
