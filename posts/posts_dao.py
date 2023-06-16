@@ -33,7 +33,7 @@ class PostsDao(object):
         has_next = page < paginator.num_pages
         _comments = []
         for comment in paged_comments:
-            _comments.append(PostsDao.post_json(comment))
+            _comments.append(PostsDao.comment_json(comment))
         return _comments, has_next
 
     @classmethod
@@ -43,4 +43,11 @@ class PostsDao(object):
                      "type": post.type,
                      "content": post.content,
                      "created_at": CommonHelper.from_db_datetime_to_datetime(post.created_at, '%Y-%m-%d', to_str=True)}
+        return post_json
+
+    @classmethod
+    def comment_json(cls, comment):
+        post_json = {"type": comment.type,
+                     "content": comment.content,
+                     "created_at": CommonHelper.from_db_datetime_to_datetime(comment.created_at, '%Y-%m-%d', to_str=True)}
         return post_json
