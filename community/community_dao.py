@@ -85,7 +85,7 @@ class CommunityDao(object):
     @classmethod
     def community_member_json(cls, community_member):
         community_member_json = {"name": community_member.user.name,
-                                 "image": community_member.user.image,
+                                 "image": str(community_member.user.image),
                                  "role": community_member.role}
         return community_member_json
 
