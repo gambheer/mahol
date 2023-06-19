@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "08874e99-6836-431e-97e5-dd31db4ee1fb",
+		"name": "Mahol",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "22346926"
+	},
+	"item": [
+		{
+			"name": "GetOTP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"phone\":\"+918952070183\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://ec2-3-109-161-214.ap-south-1.compute.amazonaws.com:8000/api/v1/users/auth/get-otp/"
+			},
+			"response": []
+		},
+		{
+			"name": "verifyotp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"phone\":\"+918952070183\",\"otp\":123456}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://ec2-3-109-161-214.ap-south-1.compute.amazonaws.com:8000/api/v1/users/auth/verify-otp/"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllCommunities",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "5368225c-0b4d-11ee-9006-5fbf46a0b92a",
+						"type": "text"
+					}
+				],
+				"url": "http://ec2-3-109-161-214.ap-south-1.compute.amazonaws.com:8000/api/v1/community/communities/"
+			},
+			"response": []
+		},
+		{
+			"name": "GetCommunityById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "5368225c-0b4d-11ee-9006-5fbf46a0b92a",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ec2-3-109-161-214.ap-south-1.compute.amazonaws.com:8000/api/v1/community/community/?id=1",
+					"protocol": "http",
+					"host": [
+						"ec2-3-109-161-214",
+						"ap-south-1",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"community",
+						"community",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
